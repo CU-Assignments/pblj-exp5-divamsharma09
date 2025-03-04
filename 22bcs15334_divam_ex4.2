@@ -1,0 +1,87 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Scanner;
+
+class Card {
+    private String symbol;
+    private String value;
+
+    public Card(String symbol, String value) {
+        this.symbol = symbol;
+        this.value = value;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return value + " of " + symbol;
+    }
+}
+
+public class CardManager {
+    private Collection<Card> cards;
+    private Scanner scanner;
+
+    public CardManager() {
+        cards = new ArrayList<>();
+        scanner = new Scanner(System.in);
+    }
+
+    public void addCard() {
+        System.out.print("Enter card symbol (e.g., Hearts, Spades): ");
+        String symbol = scanner.nextLine();
+        System.out.print("Enter card value (e.g., 2, Ace): ");
+        String value = scanner.nextLine();
+
+        Card card = new Card(symbol, value);
+        cards.add(card);
+        System.out.println("Card added: " + card);
+    }
+
+    public void findCardsBySymbol() {
+        System.out.print("Enter symbol to find (e.g., Hearts, Spades): ");
+        String symbol = scanner.nextLine();
+        System.out.println("Cards with symbol " + symbol + ":");
+        for (Card card : cards) {
+            if (card.getSymbol().equalsIgnoreCase(symbol)) {
+                System.out.println(card);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        CardManager manager = new CardManager();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\n1. Add Card");
+            System.out.println("2. Find Cards by Symbol");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    manager.addCard();
+                    break;
+                case 2:
+                    manager.findCardsBySymbol();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 3);
+        scanner.close();
+    }
+}
