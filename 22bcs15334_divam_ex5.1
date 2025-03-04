@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class SumCalculator {
+    public static void main(String[] args) {
+        // Create a list of strings representing integer values
+        List<String> stringNumbers = new ArrayList<>();
+        stringNumbers.add("10");
+        stringNumbers.add("20");
+        stringNumbers.add("30");
+        stringNumbers.add("40");
+        stringNumbers.add("50");
+
+        // Parse the strings into integers and calculate the sum
+        int sum = calculateSum(stringNumbers);
+
+        // Display the sum
+        System.out.println("The sum of the list of integers is: " + sum);
+    }
+
+    // Method to calculate the sum of a list of strings representing integer values
+    public static int calculateSum(List<String> stringNumbers) {
+        int sum = 0;
+
+        for (String number : stringNumbers) {
+            // Parse the string into an Integer object using autoboxing
+            Integer integerValue = Integer.parseInt(number);
+
+            // Unbox the Integer object into a primitive int and add it to the sum
+            sum += integerValue;
+        }
+
+        return sum;
+    }
+}
